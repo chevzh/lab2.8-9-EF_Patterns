@@ -7,6 +7,73 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Menu Grid.Row="0">
+            <MenuItem x:Name ="FileMenuItem" Header="Файл"/>
+            <MenuItem x:Name="FindMenuItem" Header="Поиск"></MenuItem>
+        </Menu>
+
+        <TabControl Grid.Row="1" Margin="0,5,0,0">
+            <TabItem Header="Вкладчики" x:Name="InvestorsTabItem" >
+                <Grid Background="#FFE5E5E5" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    
+                    <DataGrid AutoGenerateColumns="False" x:Name="InvestorsDataGrid" Grid.Row="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Имя вкладчика"/>
+                            <DataGridTextColumn Binding="{Binding Age}" Header="Возраст" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Grid.Row="1" Content="Обновить" Width="100" HorizontalAlignment="Left" Margin="100,5,0,0" Click="UpdateButton_Click" x:Name="UpdateInvestorsButton"/>
+                    <Button Grid.Row="1" Content="Удалить" Width="100" HorizontalAlignment="Right" Margin="0,5,100,0" x:Name="DeleteInvestorsButton" Click="DeleteInvestorsButton_Click"/>
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Вклады" x:Name="InvestmentsTabItem">
+                <Grid Background="#FFE5E5E5">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid AutoGenerateColumns="False" x:Name="InvestmentsDataGrid" Grid.Row="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Название Вклада"/>
+                            <DataGridTextColumn Binding="{Binding YearPercent}" Header="Годовой процент" />
+                            <DataGridTextColumn Binding="{Binding InvestmentSum}" Header="Сумма вклада" />
+                            <DataGridTextColumn Binding="{Binding InvestmentPeriod}" Header="Срок вклада (месяцы)" />
+                            <DataGridTemplateColumn Header="Дата создания вклада">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DateOfInvestment}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDateFormat="Short"  SelectedDate="{Binding DateOfInvestment}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Grid.Row="1" Content="Обновить" Width="100" HorizontalAlignment="Left" Margin="100,5,0,0" Click="UpdateButton_Click" x:Name="UpdateInvestmentButton"/>
+                    <Button Grid.Row="1" Content="Удалить" Width="100" HorizontalAlignment="Right" Margin="0,5,100,0" x:Name="DeleteInvestmentButton" Click="DeleteInvestmentsButton_Click"/>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
